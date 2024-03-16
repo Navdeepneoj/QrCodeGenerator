@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qr Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+      .qrCodeContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .qrCodeDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 23px;
+      }
+      .qrCode {
+        border: 2px solid;
+        height: 256px;
+        width: 256px;
+        border: 1px white solid;
+        border-width: thick;
+        box-shadow: 0px 0px 29px white;
+      }
+      body {
+        background-color: #6dd4c8;
+      }
+      .heading {
+        color: ivory;
+        text-shadow: 4px 1px 3px black;
+      }
+      #link {
+        border-radius: 50px;
+        border: 2px white solid;
+        box-shadow: 2px 3px 5px black;
+        font-size: medium;
+        width: 26vw;
+        padding: 13px;
+      }
+      .descriptionList{
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        font-style: italic;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="qrCodeContainer">
+      <div class="qrCodeDiv">
+        <h1 class="heading"><u>QR Code Generator</u></h1>
+
+        <div class="qrCode"></div>
+        <input
+          type="text"
+          name="link"
+          id="link"
+          onkeypress="linkHandler(event)"
+          placeholder="Paste the url OR Enter Text and then Press Enter"
+        />
+        <div class="descriptionDiv">
+          <ul class="descriptionList">
+            <li>Discreetly transmit your own message in QR code format.</li>
+            <li>Distribute your website link via QR code.</li>
+            <li>
+              Share your profile across Instagram, Facebook, and your portfolio
+              through QR codes.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let qrcode = new QRCode(document.querySelector(".qrCode"));
+      qrcode.makeCode("Why did you scan me?");
+
+      const linkHandler = (eve) => {
+        if (event.key === "Enter" /*event.keyCode === 13*/) {
+          const input = document.getElementById("link");
+          let val = input.value.trim();
+          if (val == "") {
+            alert("Enter the valid url");
+          } else {
+            qrcode.makeCode(val);
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
